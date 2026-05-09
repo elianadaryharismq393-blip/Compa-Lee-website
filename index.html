@@ -478,7 +478,20 @@
       .nav-links li:not(:last-child) { display: none; }
       .team-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
       .impact-highlight { flex-wrap: wrap; }
-    }
+    } 
+    /* ─── CURSOR SPARKLES ─── */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: sparkle-fade 0.7s ease-out forwards;
+}
+@keyframes sparkle-fade {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0) translateY(-20px); }
+}
   </style>
 </head>
 <body>
@@ -532,11 +545,11 @@
   <!-- ═══ STATS ═══ -->
   <div class="stats">
     <div class="stat">
-      <div class="stat-num" data-count="50">0</div>
+      <div class="stat-num" data-count="100">0</div>
       <div class="stat-label">Niños impactados</div>
     </div>
     <div class="stat">
-      <div class="stat-num" data-count="4">0</div>
+      <div class="stat-num" data-count="2">0</div>
       <div class="stat-label">Escuelas activas</div>
     </div>
     <div class="stat">
@@ -908,11 +921,11 @@
 
     /* ── Stage modal ── */
     const etapas = {
-      ova:      { icon: '🥚', nombre: 'Fase OVA',      info: 'La Fase OVA marca el inicio del proceso Compa\'Lee. Aquí realizamos el diagnóstico inicial, conocemos a cada estudiante y establecemos la línea base de su comprensión lectora. Es el huevo del que nace el lector.' },
-      oruguita: { icon: '🐛', nombre: 'Fase Oruguita', info: 'En esta etapa los estudiantes dan sus primeros pasos. A través de actividades lúdicas y lecturas guiadas, comienzan a explorar textos con estrategias básicas de comprensión. La oruga aprende a moverse.' },
-      capullito:{ icon: '🫘', nombre: 'Fase Capullito',info: 'El capullo es transformación. Aquí consolidamos las estrategias lectoras, trabajamos en el vocabulario y la inferencia, y preparamos al estudiante para el gran salto hacia la comprensión profunda.' },
-      malan:    { icon: '🦋', nombre: 'Nivel Malán',   info: 'Los estudiantes del Nivel Malán han desplegado sus alas. Analizan, critican y debaten textos complejos con autonomía. Son lectores que piensan, no solo que decodifican.' },
-      monarca:  { icon: '👑', nombre: 'Nivel Monarca', info: 'El nivel más alto. El Nivel Monarca es el lector pleno: autónomo, creativo, curioso. Un estudiante que ha completado este nivel lleva consigo el amor por la lectura para toda la vida.' },
+      ova:      { icon: '🥚', nombre: 'Fase OVA',      info: 'La Fase OVA marca el inicio del proceso Compa\'Lee.En esta primera etapa se construyen las bases de la comprensión lectora. Los estudiantes aprenden a identificar información explícita dentro de los textos, reconociendo ideas principales, personajes, lugares, secuencias de acontecimientos y detalles relevantes. A través de diferentes actividades, desarrollan la habilidad de localizar información concreta y comprender de forma clara lo que el texto dice directamente, fortaleciendo así una base sólida para avanzar hacia niveles más profundos de interpretación..' },
+      oruguita: { icon: '🐛', nombre: 'Fase Oruguita', info: 'En esta etapa los estudiantes dan sus primeros pasos. En esta fase los estudiantes comienzan a ir más allá de lo que el texto expresa de manera directa. Se promueve la capacidad de interpretar información implícita, descubrir significados ocultos y establecer relaciones entre distintas partes del texto. Los estudiantes aprenden a utilizar pistas contextuales, anticipar acontecimientos y formular conclusiones fundamentadas, desarrollando una lectura más reflexiva y analítica.' },
+      capullito:{ icon: '🫘', nombre: 'Fase Capullito',info: 'El capullo es transformación. Aquí consolidamos las estrategias lectoras, trabajamos en el vocabulario y la inferencia, y preparamos al estudiante para el gran salto hacia la comprensión profunda.En esta etapa se estimula la imaginación y la creatividad a partir de la lectura. Los estudiantes son invitados a interactuar activamente con los textos, generando nuevas ideas, proponiendo finales alternativos, transformando historias o relacionando lo leído con sus propias experiencias. Esta fase fortalece la expresión, la originalidad y la capacidad de pensar de forma flexible, permitiendo que la lectura se convierta en una experiencia dinámica y significativa.' },
+      malan:    { icon: '🦋', nombre: 'Nivel Malán',   info: 'Los estudiantes del Nivel Malán han desplegado sus alas. Analizan, critican y debaten textos complejos con autonomía. Son lectores que piensan, no solo que decodifican.En este nivel los estudiantes desarrollan una mirada más profunda y analítica frente a los textos. Aprenden a examinar el mensaje que transmite el autor, evaluar argumentos, identificar intenciones, puntos de vista y posibles sesgos. Además, se fomenta la capacidad de expresar opiniones propias de manera fundamentada, promoviendo el pensamiento crítico y el análisis reflexivo de la información' },
+      monarca:  { icon: '👑', nombre: 'Nivel Monarca', info: 'El nivel más alto. El Nivel Monarca es el lector pleno: autónomo, creativo, curioso. Un estudiante que ha completado este nivel lleva consigo el amor por la lectura para toda la vida.En la etapa final, la lectura se aborda desde una dimensión más personal y emocional. Los estudiantes aprenden a valorar los textos, reconocer su impacto, apreciar el lenguaje, las enseñanzas y los mensajes que transmiten. Se fomenta una conexión más profunda con la lectura, permitiendo que los estudiantes reflexionen sobre lo que sienten, lo que aprenden y cómo el contenido leído puede influir en su forma de ver el mundo.' },
       impacto:  { icon: '🌟', nombre: 'Nuestro Impacto',info: 'Compa\'Lee ha impactado a más de 50 niños y niñas en 4 escuelas de Panamá. Nuestros resultados muestran mejoras significativas en comprensión lectora, vocabulario y pensamiento crítico en todos los niveles del programa.' },
     };
     function abrirEtapa(id) {
@@ -950,6 +963,34 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') { cerrarMiembroBtn(); cerrarEscuelaBtn(); cerrarEtapaBtn(); }
     });
+    /* ── Cursor sparkles ── */
+const sparkleColors = ['#7BAF7E','#F5E6A3','#E87B6A','#A8CCA9','#E8CC6A','#ffffff'];
+const sparkleShapes = ['✦','✧','⋆','·','★','✺'];
+let lastSparkle = 0;
+
+document.addEventListener('mousemove', e => {
+  const now = Date.now();
+  if (now - lastSparkle < 40) return; // limita a ~25 por segundo
+  lastSparkle = now;
+
+  const el = document.createElement('span');
+  el.className = 'sparkle';
+  el.textContent = sparkleShapes[Math.floor(Math.random() * sparkleShapes.length)];
+
+  const size = 10 + Math.random() * 14;
+  const color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+
+  el.style.cssText = `
+    left: ${e.clientX}px;
+    top: ${e.clientY}px;
+    font-size: ${size}px;
+    color: ${color};
+    text-shadow: 0 0 6px ${color};
+  `;
+
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 700);
+});
   </script>
 </body>
 </html>
