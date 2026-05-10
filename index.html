@@ -274,13 +274,13 @@
 
     /* ── Icono de etapa con imagen ── */
     .stage-icon {
-      width: 52px; height: 52px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.4rem;
-    }
-    .stage-icon img {
-      width: 100%; height: 100%; object-fit: contain; display: block;
-    }
+  width: 80px; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.4rem;
+}
+.stage-icon img {
+  width: 100%; height: 100%; object-fit: contain; display: block;
+}
 
     .stage-label { font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     .stage-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
@@ -346,6 +346,29 @@
     }
     .member-role { font-size: .8rem; color: var(--sage-light); font-weight: 600; padding: 0 1rem; margin-top: .3rem; }
 
+    <!-- ═══ CHATBOT COMPA ═══ -->
+<button class="chat-btn" onclick="toggleChat()" title="Habla con Compa">
+  🦋
+  <span class="chat-badge">¡Hola!</span>
+</button>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">🦋</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Compa</div>
+      <div class="chat-header-status">Asistente de Compa'Lee</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input-area">
+    <input class="chat-input" id="chatInput" type="text"
+           placeholder="Escríbele a Compa..."
+           onkeydown="if(event.key==='Enter') enviarMensaje()">
+    <button class="chat-send" id="chatSend" onclick="enviarMensaje()">➤</button>
+  </div>
+</div>
     /* ─── MEMBER MODAL ─── */
     .member-modal {
       position: fixed; inset: 0; z-index: 500;
@@ -397,8 +420,8 @@
     .school-row:hover { border-color: var(--border); box-shadow: 0 8px 24px rgba(0,0,0,.08); transform: translateX(6px); }
 
     /* ── Icono de escuela con imagen ── */
-    .school-icon {
-  width: 64px; height: 64px; flex-shrink: 0;
+  .school-icon {
+  width: 80px; height: 80px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
 }
 .school-icon img {
@@ -420,11 +443,13 @@
     }
     .school-modal.open { opacity: 1; pointer-events: all; }
     .school-modal-card {
-      background: var(--surface); border-radius: 2rem;
-      max-width: 540px; width: 100%; padding: 2.5rem;
-      transform: scale(.92); transition: transform .3s, background .35s;
-      box-shadow: 0 40px 100px rgba(0,0,0,.3);
-    }
+  background: var(--surface); border-radius: 2rem;
+  max-width: 540px; width: 100%; padding: 2.5rem;
+  transform: scale(.92); transition: transform .3s, background .35s;
+  box-shadow: 0 40px 100px rgba(0,0,0,.3);
+  max-height: 85vh;
+  overflow-y: auto;
+}
     .school-modal.open .school-modal-card { transform: scale(1); }
     .school-modal-icon { font-size: 3rem; margin-bottom: 1rem; }
     .school-modal-name {
@@ -738,7 +763,7 @@
           <div class="member-role">Coordinadora</div>
         </div>
 
-        <div class="member-card reveal" style="transition-delay:.15s" onclick="abrirMiembro('Audry','Comunicaciones','Audry transforma ideas en experiencias de aprendizaje concretas y efectivas para los estudiantes.','👩‍💻''audry, presentacion .png')">
+        <div class="member-card reveal" style="transition-delay:.15s" onclick="abrirMiembro('Audry','Comunicaciones','Audry transforma ideas en experiencias de aprendizaje concretas y efectivas para los estudiantes.','👩‍💻','audry, presentacion .png')">
           <div class="member-photo-wrap">
             <img src="audry, presentacion .png" alt="Audry"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -758,7 +783,7 @@
           <div class="member-role">Responsable de Logística</div>
         </div>
 
-        <div class="member-card reveal" style="transition-delay:.25s" onclick="abrirMiembro('Joshua','Comunicaciones','El motor operativo del proyecto. Apoya la difusión del proyecto y su presencia en la comunidad. Contribuye a que el mensaje de CompaLee llegue a más familias, docentes y aliados que puedan sumarse a la causa.o.','⚙️','Joshua, presentacion .png')">
+        <div class="member-card reveal" style="transition-delay:.25s" onclick="abrirMiembro('Joshua','Comunicaciones','El motor operativo del proyecto. Apoya la difusión del proyecto y su presencia en la comunidad. Contribuye a que el mensaje de CompaLee llegue a más familias, docentes y aliados que puedan sumarse a la causa.o.','⚙️','Joshua, presentación .png')">
           <div class="member-photo-wrap">
             <img src="Joshua, presentación .png" alt="Joshua"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -778,7 +803,7 @@
           <div class="member-role">Comunicaciones</div>
         </div>
 
-        <div class="member-card reveal" style="transition-delay:.35s" onclick="abrirMiembro('Nelson','Responsable de Logística','Apoya la coordinación operativa en terreno. Se asegura de que cada detalle esté resuelto antes, durante y después de cada actividad, para que el equipo pueda enfocarse en lo que importa.','🛠️','Nelson, presentacion .png')">
+        <div class="member-card reveal" style="transition-delay:.35s" onclick="abrirMiembro('Nelson','Responsable de Logística','Apoya la coordinación operativa en terreno. Se asegura de que cada detalle esté resuelto antes, durante y después de cada actividad, para que el equipo pueda enfocarse en lo que importa.','🛠️','Nelson, presentación .png')">
           <div class="member-photo-wrap">
             <img src="Nelson, presentación .png" alt="Nelson"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -1001,6 +1026,105 @@ document.addEventListener('mousemove', e => {
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 700);
 });
+    /* ─── CHATBOT COMPA ─── */
+.chat-btn {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--sage-dark); color: white;
+  border: none; cursor: pointer; font-size: 2rem;
+  box-shadow: 0 8px 32px rgba(76,123,80,.4);
+  transition: transform .2s, box-shadow .2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.chat-btn:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(76,123,80,.5); }
+.chat-btn .chat-badge {
+  position: absolute; top: -4px; right: -4px;
+  background: var(--coral); color: white;
+  font-size: .6rem; font-weight: 800;
+  padding: 2px 6px; border-radius: 999px;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+.chat-window {
+  position: fixed; bottom: 6.5rem; right: 2rem; z-index: 200;
+  width: 340px; max-height: 500px;
+  background: var(--surface); border-radius: 1.5rem;
+  box-shadow: 0 24px 80px rgba(0,0,0,.2);
+  display: flex; flex-direction: column;
+  border: 2px solid var(--border);
+  transform: scale(.9) translateY(20px);
+  opacity: 0; pointer-events: none;
+  transition: transform .3s, opacity .3s;
+}
+.chat-window.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: all; }
+.chat-header {
+  background: var(--sage-dark); color: white;
+  padding: 1rem 1.2rem; border-radius: 1.3rem 1.3rem 0 0;
+  display: flex; align-items: center; gap: .8rem;
+}
+.chat-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+.chat-header-info { flex: 1; }
+.chat-header-name { font-weight: 800; font-size: .95rem; }
+.chat-header-status { font-size: .75rem; opacity: .8; }
+.chat-close { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; opacity: .8; padding: .2rem; line-height: 1; }
+.chat-close:hover { opacity: 1; }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 1rem;
+  display: flex; flex-direction: column; gap: .8rem;
+  max-height: 320px;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.chat-msg {
+  max-width: 82%; padding: .65rem .9rem;
+  border-radius: 1rem; font-size: .88rem; line-height: 1.5;
+  animation: msg-in .25s ease;
+}
+@keyframes msg-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.chat-msg.bot {
+  background: var(--surface2); color: var(--text);
+  border-bottom-left-radius: .2rem; align-self: flex-start;
+  border: 1.5px solid var(--border);
+}
+.chat-msg.user {
+  background: var(--sage-dark); color: white;
+  border-bottom-right-radius: .2rem; align-self: flex-end;
+}
+.chat-msg.typing { background: var(--surface2); border: 1.5px solid var(--border); align-self: flex-start; padding: .8rem 1rem; }
+.typing-dots { display: flex; gap: 4px; align-items: center; }
+.typing-dots span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--muted); display: block;
+  animation: dot-bounce .9s ease-in-out infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: .15s; }
+.typing-dots span:nth-child(3) { animation-delay: .3s; }
+@keyframes dot-bounce { 0%,80%,100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+.chat-input-area {
+  padding: .8rem 1rem; border-top: 1.5px solid var(--border);
+  display: flex; gap: .5rem; align-items: center;
+}
+.chat-input {
+  flex: 1; border: 1.5px solid var(--border); border-radius: 999px;
+  padding: .5rem 1rem; font-size: .88rem; font-family: 'Nunito', sans-serif;
+  background: var(--surface2); color: var(--text);
+  outline: none; transition: border-color .2s;
+}
+.chat-input:focus { border-color: var(--sage); }
+.chat-send {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--sage-dark); color: white;
+  border: none; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s; flex-shrink: 0;
+}
+.chat-send:hover { transform: scale(1.1); }
+.chat-send:disabled { opacity: .5; cursor: not-allowed; transform: none; }
     /* ── Chatbot Compa (Gemini) ── */
 const API_KEY = 'AIzaSyDzQ2wyXJLW1mpjb8irZrWdiIw2e3RyR0o';
 const SYSTEM_PROMPT = `Eres Compa, la mascota y asistente virtual de Compa'Lee, un proyecto educativo panameño que fortalece la comprensión lectora en estudiantes de primaria. Tu personalidad es cálida, entusiasta y cercana — como una mariposa guía.
