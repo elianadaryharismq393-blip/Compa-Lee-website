@@ -937,7 +937,7 @@
   </div>
 
   <!-- ═══ CHATBOT COMPA — HTML ═══ -->
-  <button class="chat-btn" onclick="toggleChat()" title="Habla con Lümina ">
+  <button class="chat-btn" onclick="toggleChat()" title="Habla con Compa">
     🦋
     <span class="chat-badge">¡Hola!</span>
   </button>
@@ -1111,7 +1111,7 @@
     });
 
     /* ─── CHATBOT COMPA — JS ─── */
-    const SYSTEM_PROMPT = `Eres Lümina , la mascota y asistente virtual de Compa'Lee, un proyecto educativo panameño que fortalece la comprensión lectora en estudiantes de primaria. Tu personalidad es cálida, entusiasta y cercana — como una mariposa guía.
+    const SYSTEM_PROMPT = `Eres Lümina, la mascota y asistente virtual de Compa'Lee, un proyecto educativo panameño que fortalece la comprensión lectora en estudiantes de primaria. Tu personalidad es cálida, entusiasta y cercana — como una mariposa guía.
 
 Sobre el proyecto:
 - Compa'Lee trabaja con escuelas públicas y privadas de Panamá
@@ -1187,7 +1187,7 @@ Responde siempre en español, de forma breve y amigable. Si no sabes algo espec�
 
       try {
         const res = await fetch(
-  `compalee-proxy.elianadaryharismq393.workers.dev,
+          `https://compalee-proxy.elianadaryharismq393.workers.dev`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
