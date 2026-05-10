@@ -1111,8 +1111,7 @@
     });
 
     /* ─── CHATBOT COMPA — JS ─── */
-    const API_KEY = 'AIzaSyBmEzbHuEQMYC4IOcE7P_kK3hNcfyu5pUQ';
-    const SYSTEM_PROMPT = `Eres Compa, la mascota y asistente virtual de Compa'Lee, un proyecto educativo panameño que fortalece la comprensión lectora en estudiantes de primaria. Tu personalidad es cálida, entusiasta y cercana — como una mariposa guía.
+    const SYSTEM_PROMPT = `Eres Lümina , la mascota y asistente virtual de Compa'Lee, un proyecto educativo panameño que fortalece la comprensión lectora en estudiantes de primaria. Tu personalidad es cálida, entusiasta y cercana — como una mariposa guía.
 
 Sobre el proyecto:
 - Compa'Lee trabaja con escuelas públicas y privadas de Panamá
@@ -1188,7 +1187,7 @@ Responde siempre en español, de forma breve y amigable. Si no sabes algo espec�
 
       try {
         const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
+  `https://compalee-proxy.TU-USUARIO.workers.dev`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
